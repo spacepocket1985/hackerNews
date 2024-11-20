@@ -1,3 +1,9 @@
+import { PageWrapper } from '../components/pageWrapper/Container';
+
 export const Main: React.FC = () => {
-  return <h2>Main</h2>;
+  return (
+    <PageWrapper title="Main page">
+      <div>some data</div>
+    </PageWrapper>
+  );
 };
