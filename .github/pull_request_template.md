@@ -1,4 +1,4 @@
-#### 🐶 [Task link](url)
+#### 🐶 Project issues:
 
 #### 🤔 This is a ...
 
@@ -8,8 +8,8 @@
 - [ ] Refactoring
 - [ ] Other
 
-#### 🐯 Task description:
+#### 🐯 Additional task description: [Not needed]
 
-#### 🐷 Deploy: [Link](url)
+#### 🐷 Deploy: [Not needed](url)
 
 #### 🐴 ScreenShot
