@@ -1,3 +1,4 @@
+import { NewsList } from '../components/newsList/NewsList';
 import { PageWrapper } from '../components/pageWrapper/Container';
 import {
   useGetItemsQuery,
@@ -18,13 +19,7 @@ export const Main: React.FC = () => {
 
   return (
     <PageWrapper title="Main page">
-      <div>Top 100 News</div>
-      {/* {news.map((newsItem) => (  
-        <div key={newsItem.id}>  
-          <h2>{newsItem.title}</h2>  
-          <p>Comments: {comments.filter(comment => comment.parent === newsItem.id).length}</p> 
-        </div>  
-      ))}   */}
+      <NewsList news={news}/>
     </PageWrapper>
   );
 };
