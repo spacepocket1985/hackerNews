@@ -2,6 +2,8 @@ import React from 'react';
 import { CommentItemType } from '../../types/apiTypes';
 import { Comment } from './Comment';
 import { Spoiler } from '../spoiler/Spoiler';
+import { ItemData } from '../news/ItemData';
+import { Box } from '@mui/material';
 
 export const CommentsList: React.FC<{ comments: CommentItemType[] }> = ({
   comments,
@@ -10,7 +12,7 @@ export const CommentsList: React.FC<{ comments: CommentItemType[] }> = ({
     return comments.map((item) => {
       return (
         <>
-          <div key={item.id}> {`[autor] ${item.by}`} </div>
+          <ItemData keyData={'written by'} valueData={item.by}/>
           <Comment commentText={item.text} />
           {item.childComment ? (
             <Spoiler>{renderComents(item.childComment)}</Spoiler>
@@ -20,5 +22,5 @@ export const CommentsList: React.FC<{ comments: CommentItemType[] }> = ({
     });
   };
 
-  return <div>{renderComents(comments)}</div>;
+  return <Box sx={{mt:1}}>{renderComents(comments)}</Box>;
 };

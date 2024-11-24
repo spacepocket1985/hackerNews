@@ -26,7 +26,7 @@ export const Comment: React.FC<{ commentText: string }> = ({ commentText }) => (
     extensions={[EditorView.lineWrapping, javascript()]}
     basicSetup={defaultSettings}
     width="auto"
-    minHeight="5rem"
+    minHeight="2rem"
     readOnly
   />
 );
