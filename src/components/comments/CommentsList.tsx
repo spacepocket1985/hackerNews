@@ -1,6 +1,7 @@
 import React from 'react';
 import { CommentItemType } from '../../types/apiTypes';
 import { Comment } from './Comment';
+import { Spoiler } from '../spoiler/Spoiler';
 
 export const CommentsList: React.FC<{ comments: CommentItemType[] }> = ({
   comments,
@@ -10,11 +11,9 @@ export const CommentsList: React.FC<{ comments: CommentItemType[] }> = ({
       return (
         <>
           <div key={item.id}> {`[autor] ${item.by}`} </div>
-          <Comment commentText={item.text}/>
+          <Comment commentText={item.text} />
           {item.childComment ? (
-            <div style={{ marginLeft: '15px' }}>
-              {renderComents(item.childComment)}
-            </div>
+            <Spoiler>{renderComents(item.childComment)}</Spoiler>
           ) : null}
         </>
       );
