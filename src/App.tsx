@@ -7,7 +7,12 @@ import { Header } from './components/layout/Header';
 
 const App: FC = () => {
   return (
-    <Router>
+    <Router
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
+    >
       <Header />
       <AppRouter />
     </Router>

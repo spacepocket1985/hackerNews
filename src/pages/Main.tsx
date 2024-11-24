@@ -1,9 +1,10 @@
+import { NewsList } from '../components/news/NewsList';
 import { PageWrapper } from '../components/pageWrapper/Container';
 
 export const Main: React.FC = () => {
   return (
-    <PageWrapper title="Main page">
-      <div>some data</div>
+    <PageWrapper title="News list">
+      <NewsList />
     </PageWrapper>
   );
 };
