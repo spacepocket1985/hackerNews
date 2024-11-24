@@ -1,5 +1,6 @@
 import React from 'react';
 import { CommentItemType } from '../../types/apiTypes';
+import { Comment } from './Comment';
 
 export const CommentsList: React.FC<{ comments: CommentItemType[] }> = ({
   comments,
@@ -9,7 +10,7 @@ export const CommentsList: React.FC<{ comments: CommentItemType[] }> = ({
       return (
         <>
           <div key={item.id}> {`[autor] ${item.by}`} </div>
-          <div>{item.text}</div>
+          <Comment commentText={item.text}/>
           {item.childComment ? (
             <div style={{ marginLeft: '15px' }}>
               {renderComents(item.childComment)}
