@@ -1,5 +1,5 @@
 import { Main } from '../pages/Main';
-import { News } from '../pages/News';
+import { NewsPage } from '../pages/NewsPage';
 import { NotFound } from '../pages/NotFound';
 import { RoutePaths } from './routePaths';
 
@@ -10,7 +10,7 @@ export const publicRoutes = [
   },
   {
     path: RoutePaths.News,
-    Page: News,
+    Page: NewsPage,
   },
 
   {

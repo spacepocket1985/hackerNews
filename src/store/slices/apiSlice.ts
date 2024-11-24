@@ -1,9 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import {
-  CommentItemType,
-  ItemType,
-  NewsItemType,
-} from '../../types/apiTypes.ts';
+import { CommentItemType, ItemType, NewsItemType } from '../../types/apiTypes';
+
+export type NewsWithComments = {
+  news: NewsItemType;
+  comments: CommentItemType[];
+};
+
+export type ItemTypeUnion = NewsItemType | CommentItemType;
 
 const BaseUrl = 'https://hacker-news.firebaseio.com/v0/';
 const ItemsEndpoint = 'newstories.json?print=pretty';
@@ -13,58 +16,68 @@ export const newsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BaseUrl }),
   tagTypes: ['news'],
   endpoints: (builder) => ({
-    getLastNews: builder.query<number[], void>({
+    getNewsIds: builder.query<number[], void>({
       query: () => ({ url: ItemsEndpoint }),
       transformResponse: (response: number[]) => response.slice(0, 100),
-      providesTags: () => ['news'],
     }),
 
-    getItems: builder.query<
-      { news: NewsItemType[]; comments: CommentItemType[] },
-      number[]
-    >({
+    getNews: builder.query<NewsItemType[], number[]>({
       async queryFn(ids: number[], _api, _extraOptions, baseQuery) {
-        const results = await Promise.all(
+        const responses = await Promise.all(
           ids.map((id) => baseQuery(`item/${id.toString()}.json?print=pretty`))
         );
+        const news: NewsItemType[] = responses
+          .map((response) => response.data)
+          .filter((item): item is NewsItemType => item !== undefined);
 
-        const news: NewsItemType[] = [];
-        const comments: CommentItemType[] = [];
+        return { data: news };
+      },
+    }),
 
-        const fetchComments = async (commentIds: number[]) => {
+    getNewsWithComments: builder.query<NewsWithComments, number>({
+      async queryFn(id: number, _api, _extraOptions, baseQuery) {
+        const newsResult = await baseQuery(
+          `item/${id.toString()}.json?print=pretty`
+        );
+        const newsItem = newsResult.data as NewsItemType;
+
+        const fetchComments = async (
+          commentIds: number[]
+        ): Promise<CommentItemType[]> => {
           const commentResults = await Promise.all(
-            commentIds.map((id) =>
-              baseQuery(`item/${id.toString()}.json?print=pretty`)
+            commentIds.map((commentId) =>
+              baseQuery(`item/${commentId.toString()}.json?print=pretty`)
             )
           );
 
+          const fetchedComments: CommentItemType[] = [];
           for (const result of commentResults) {
             const comment = result.data as CommentItemType;
             if (comment) {
-              comments.push(comment);
-
               if (comment.kids && comment.kids.length) {
-                await fetchComments(comment.kids);
+                comment.childComment = await fetchComments(comment.kids);
               }
+              fetchedComments.push(comment);
             }
           }
+          return fetchedComments;
         };
 
-        for (const result of results) {
-          const item = result.data as NewsItemType;
-          if (item && item.type === ItemType.News) {
-            news.push(item);
-
-            if (item.kids && item.kids.length) {
-              await fetchComments(item.kids);
-            }
+        const comments: CommentItemType[] = [];
+        if (newsItem && newsItem.type === ItemType.News) {
+          if (newsItem.kids && newsItem.kids.length) {
+            comments.push(...(await fetchComments(newsItem.kids)));
           }
         }
 
-        return { data: { news, comments } };
+        return { data: { news: newsItem, comments } };
       },
     }),
   }),
 });
 
-export const { useGetLastNewsQuery, useGetItemsQuery } = newsApi;
+export const {
+  useGetNewsIdsQuery,
+  useGetNewsQuery,
+  useGetNewsWithCommentsQuery,
+} = newsApi;

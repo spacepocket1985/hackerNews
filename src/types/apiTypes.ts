@@ -23,4 +23,5 @@ export type CommentItemType = {
   text: string;
   time: number;
   type: ItemType.Comment;
+  childComment?: CommentItemType[];
 };
