@@ -14,7 +14,7 @@ export const Spoiler: React.FC<{ children: React.ReactNode }> = ({
       aria-controls="panel1-content"
       id="panel1-header"
     >
-      <Typography variant='subtitle2'>View attached comments</Typography>
+      <Typography variant="subtitle2">View attached comments</Typography>
     </AccordionSummary>
     <AccordionDetails>{children}</AccordionDetails>
   </Accordion>

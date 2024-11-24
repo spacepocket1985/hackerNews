@@ -14,7 +14,7 @@ export const NewsList: React.FC = () => {
   const { data: newsIds } = useGetNewsIdsQuery();
   const { data: news, isFetching } = useGetNewsQuery(newsIds ?? []);
 
-  if (isFetching) return <Spinner/>;
+  if (isFetching) return <Spinner />;
 
   const renderNews = news!.map((item) => (
     <Link

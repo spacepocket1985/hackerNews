@@ -12,7 +12,7 @@ export const CommentsList: React.FC<{ comments: CommentItemType[] }> = ({
     return comments.map((item) => {
       return (
         <>
-          <ItemData keyData={'written by'} valueData={item.by}/>
+          <ItemData keyData={'written by'} valueData={item.by} />
           <Comment commentText={item.text} />
           {item.childComment ? (
             <Spoiler>{renderComents(item.childComment)}</Spoiler>
@@ -22,5 +22,5 @@ export const CommentsList: React.FC<{ comments: CommentItemType[] }> = ({
     });
   };
 
-  return <Box sx={{mt:1}}>{renderComents(comments)}</Box>;
+  return <Box sx={{ mt: 1 }}>{renderComents(comments)}</Box>;
 };
