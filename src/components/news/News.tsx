@@ -4,11 +4,13 @@ import {
   ListItemAvatar,
   ListItemText,
   Link,
+  Typography,
 } from '@mui/material';
 import ArticleIcon from '@mui/icons-material/Article';
 import { ItemData } from './ItemData';
 import { NewsItemType } from '../../types/apiTypes';
 import { TimeConverter } from '../../utils/timeConverter';
+import React from 'react';
 
 export enum NewsType {
   List = 'list',
@@ -28,13 +30,15 @@ export const News: React.FC<{ type: NewsType; news: NewsItemType }> = ({
       </ListItemAvatar>
       <ListItemText
         primary={
-          <Link
-            href={type === NewsType.SingleNews ? news.url : '#'}
-            target="_blank"
-            color="textPrimary"
-          >
-            {news.title}
-          </Link>
+          type === NewsType.SingleNews ? (
+            <Link href={news.url} target="_blank" color="textPrimary">
+              {news.title}
+            </Link>
+          ) : (
+            <Typography component={'span'} variant="subtitle1">
+              {news.title}
+            </Typography>
+          )
         }
         secondary={
           <>

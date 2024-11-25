@@ -25,5 +25,5 @@ export const NewsList: React.FC = () => {
       <News type={NewsType.List} news={item} />
     </Link>
   ));
-  return <List>{renderNews}</List>;
+  return <List sx={{ width: '100%' }}>{renderNews}</List>;
 };
