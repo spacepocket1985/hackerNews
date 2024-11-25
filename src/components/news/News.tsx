@@ -3,7 +3,7 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Typography,
+  Link,
 } from '@mui/material';
 import ArticleIcon from '@mui/icons-material/Article';
 import { ItemData } from './ItemData';
@@ -28,9 +28,13 @@ export const News: React.FC<{ type: NewsType; news: NewsItemType }> = ({
       </ListItemAvatar>
       <ListItemText
         primary={
-          <Typography component={'span'} variant="h6">
+          <Link
+            href={type === NewsType.SingleNews ? news.url : '#'}
+            target="_blank"
+            color="textPrimary"
+          >
             {news.title}
-          </Typography>
+          </Link>
         }
         secondary={
           <>
