@@ -11,10 +11,10 @@ import { News, NewsType } from './News';
 import { Spinner } from '../spinner/Spinner';
 
 export const NewsList: React.FC = () => {
-  const { data: newsIds } = useGetNewsIdsQuery();
+  const { data: newsIds, isFetching: isFetchingIds } = useGetNewsIdsQuery();
   const { data: news, isFetching } = useGetNewsQuery(newsIds ?? []);
 
-  if (isFetching) return <Spinner />;
+  if (isFetchingIds || isFetching) return <Spinner />;
 
   const renderNews = news!.map((item) => (
     <Link

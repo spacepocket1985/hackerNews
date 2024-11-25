@@ -14,7 +14,6 @@ const ItemsEndpoint = 'newstories.json?print=pretty';
 export const newsApi = createApi({
   reducerPath: 'hackerNewsApi',
   baseQuery: fetchBaseQuery({ baseUrl: BaseUrl }),
-  tagTypes: ['news'],
   endpoints: (builder) => ({
     getNewsIds: builder.query<number[], void>({
       query: () => ({ url: ItemsEndpoint }),

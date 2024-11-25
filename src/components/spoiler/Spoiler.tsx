@@ -8,13 +8,15 @@ import { Typography } from '@mui/material';
 export const Spoiler: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => (
-  <Accordion>
+  <Accordion sx={{ mb: 2 }}>
     <AccordionSummary
       expandIcon={<ExpandMoreIcon />}
       aria-controls="panel1-content"
       id="panel1-header"
     >
-      <Typography variant="subtitle2">View attached comments</Typography>
+      <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+        View attached comments
+      </Typography>
     </AccordionSummary>
     <AccordionDetails>{children}</AccordionDetails>
   </Accordion>

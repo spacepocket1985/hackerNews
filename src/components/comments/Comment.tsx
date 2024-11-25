@@ -1,32 +1,13 @@
-import CodeMirror, { EditorView } from '@uiw/react-codemirror';
-import { javascript } from '@codemirror/lang-javascript';
+import { Paper } from '@mui/material';
+import DOMPurify from 'dompurify';
+import parse from 'html-react-parser';
 
-const defaultSettings = {
-  highlightActiveLine: true,
-  autocompletion: true,
-  foldGutter: true,
-  dropCursor: true,
-  allowMultipleSelections: true,
-  indentOnInput: true,
-  bracketMatching: true,
-  closeBrackets: true,
-  lintKeymap: true,
+export const Comment: React.FC<{ commentText: string }> = ({ commentText }) => {
+  const cleanHTML = DOMPurify.sanitize(commentText);
+
+  return (
+    <Paper elevation={2} sx={{ p: 2, mb: 2, backgroundColor: 'lightgrey' }}>
+      {parse(cleanHTML)}
+    </Paper>
+  );
 };
-
-export const Comment: React.FC<{ commentText: string }> = ({ commentText }) => (
-  <CodeMirror
-    style={{
-      textAlign: 'start',
-      whiteSpace: 'pre-wrap',
-      wordBreak: 'normal',
-      wordWrap: 'break-word',
-      marginBottom: '10px',
-    }}
-    value={commentText}
-    extensions={[EditorView.lineWrapping, javascript()]}
-    basicSetup={defaultSettings}
-    width="auto"
-    minHeight="2rem"
-    readOnly
-  />
-);
