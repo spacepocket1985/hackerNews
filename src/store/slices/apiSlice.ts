@@ -95,7 +95,7 @@ export const newsApi = createApi({
           const fetchedComments: CommentItemType[] = [];
           for (const result of commentResults) {
             const comment = result.data as CommentItemType;
-            if (comment) {
+            if (comment && !comment.deleted) {
               if (comment.kids && comment.kids.length) {
                 comment.childComment = await fetchComments(comment.kids);
               }

@@ -8,6 +8,7 @@ import { News, NewsType } from '../components/news/News';
 import { CommentsList } from '../components/comments/CommentsList';
 import { Spinner } from '../components/spinner/Spinner';
 import { Typography } from '@mui/material';
+import { getCommentsCount } from '../utils/getCommentsCount';
 
 export const NewsPage: React.FC = () => {
   const { id } = useParams();
@@ -35,7 +36,11 @@ export const NewsPage: React.FC = () => {
         <Spinner />
       ) : (
         <>
-          <News type={NewsType.SingleNews} news={news!} />
+          <News
+            type={NewsType.SingleNews}
+            news={news!}
+            commentsCount={getCommentsCount(comments || [])}
+          />
 
           {isFetchingComments ? (
             <Spinner />

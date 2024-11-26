@@ -17,10 +17,11 @@ export enum NewsType {
   SingleNews = 'news',
 }
 
-export const News: React.FC<{ type: NewsType; news: NewsItemType }> = ({
-  type,
-  news,
-}) => {
+export const News: React.FC<{
+  type: NewsType;
+  news: NewsItemType;
+  commentsCount?: number;
+}> = ({ type, news, commentsCount }) => {
   return (
     <ListItem sx={{ border: '1.5px solid #1976d2', borderRadius: 5, mb: 1 }}>
       <ListItemAvatar>
@@ -49,7 +50,7 @@ export const News: React.FC<{ type: NewsType; news: NewsItemType }> = ({
               <>
                 <ItemData
                   keyData={'commentsCount'}
-                  valueData={(news.kids?.length || 0).toString()}
+                  valueData={commentsCount!.toString()}
                 />
               </>
             )}
