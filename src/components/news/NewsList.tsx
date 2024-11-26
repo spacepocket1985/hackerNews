@@ -1,21 +1,10 @@
 import * as React from 'react';
 import List from '@mui/material/List';
-
-import {
-  useGetNewsIdsQuery,
-  useGetNewsQuery,
-} from '../../store/slices/apiSlice';
 import { Link } from 'react-router-dom';
-
 import { News, NewsType } from './News';
-import { Spinner } from '../spinner/Spinner';
+import { NewsItemType } from '../../types/apiTypes';
 
-export const NewsList: React.FC = () => {
-  const { data: newsIds, isFetching: isFetchingIds } = useGetNewsIdsQuery();
-  const { data: news, isFetching } = useGetNewsQuery(newsIds ?? []);
-
-  if (isFetchingIds || isFetching) return <Spinner />;
-
+export const NewsList: React.FC<{ news: NewsItemType[] }> = ({ news }) => {
   const renderNews = news!.map((item) => (
     <Link
       to={String(item.id)}
@@ -25,5 +14,5 @@ export const NewsList: React.FC = () => {
       <News type={NewsType.List} news={item} />
     </Link>
   ));
-  return <List>{renderNews}</List>;
+  return <List sx={{ width: '100%' }}>{renderNews}</List>;
 };
