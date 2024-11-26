@@ -12,6 +12,23 @@ export const PageWrapper: React.FC<{
   children: React.ReactNode;
   onRefetch?: () => void;
 }> = ({ title, children, onRefetch }) => {
+  const renderControllButtons = () => (
+    <>
+      <Button color="primary" variant="contained" onClick={onRefetch}>
+        {'Refresh '}
+        {title === PageTitle.Main ? 'news' : 'comments'}
+      </Button>
+      <Button
+        color="primary"
+        variant="contained"
+        component={Link}
+        to={RoutePaths.Main}
+      >
+        Home
+      </Button>
+    </>
+  );
+
   return (
     <Container
       maxWidth="md"
@@ -44,20 +61,7 @@ export const PageWrapper: React.FC<{
         >
           {title}
         </Typography>
-        <Box sx={{ display: 'flex', gap: 0.5 }}>
-          <Button color="primary" variant="contained" onClick={onRefetch}>
-            {'Refresh'}
-            {title === PageTitle.Main ? 'news' : 'comments'}
-          </Button>
-          <Button
-            color="primary"
-            variant="contained"
-            component={Link}
-            to={RoutePaths.Main}
-          >
-            Home
-          </Button>
-        </Box>
+        <Box sx={{ display: 'flex', gap: 0.5 }}>{renderControllButtons()}</Box>
       </Box>
       {children}
     </Container>
