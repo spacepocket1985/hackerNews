@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { PageWrapper } from '../components/pageWrapper/Container';
+import { PageTitle, PageWrapper } from '../components/pageWrapper/Container';
 import {
   useGetCommentsQuery,
   useGetSingleNewsQuery,
@@ -7,7 +7,6 @@ import {
 import { News, NewsType } from '../components/news/News';
 import { CommentsList } from '../components/comments/CommentsList';
 import { Spinner } from '../components/spinner/Spinner';
-import { Button } from '@mui/material';
 
 export const NewsPage: React.FC = () => {
   const { id } = useParams();
@@ -26,15 +25,12 @@ export const NewsPage: React.FC = () => {
   };
 
   return (
-    <PageWrapper title={`News page`}>
+    <PageWrapper title={PageTitle.News} onRefetch={handleRefresh}>
       {isFetchingNews ? (
         <Spinner />
       ) : (
         <>
           <News type={NewsType.SingleNews} news={news!} />
-          <Button variant="contained" onClick={handleRefresh}>
-            Refresh comments
-          </Button>
 
           {isFetchingComments ? (
             <Spinner />

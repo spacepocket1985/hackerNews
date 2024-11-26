@@ -2,10 +2,16 @@ import { Box, Button, Container, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { RoutePaths } from '../../routes/routePaths';
 
+export enum PageTitle {
+  Main = 'News list | 100 last news',
+  News = 'News page',
+}
+
 export const PageWrapper: React.FC<{
-  title: string;
+  title: PageTitle;
   children: React.ReactNode;
-}> = ({ title, children }) => {
+  onRefetch?: () => void;
+}> = ({ title, children, onRefetch }) => {
   return (
     <Container
       maxWidth="md"
@@ -39,6 +45,10 @@ export const PageWrapper: React.FC<{
           {title}
         </Typography>
         <Box sx={{ display: 'flex', gap: 0.5 }}>
+          <Button color="primary" variant="contained" onClick={onRefetch}>
+            {'Refresh'}
+            {title === PageTitle.Main ? 'news' : 'comments'}
+          </Button>
           <Button
             color="primary"
             variant="contained"
