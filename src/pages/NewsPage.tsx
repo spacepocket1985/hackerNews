@@ -7,25 +7,30 @@ import {
 import { News, NewsType } from '../components/news/News';
 import { CommentsList } from '../components/comments/CommentsList';
 import { Spinner } from '../components/spinner/Spinner';
+import { Typography } from '@mui/material';
 
 export const NewsPage: React.FC = () => {
   const { id } = useParams();
 
-  const { data: news, isFetching: isFetchingNews } = useGetSingleNewsQuery(
-    Number(id)
-  );
+  const newsId = Number(id);
+
+  const { data: news, isFetching: isFetchingNews } =
+    useGetSingleNewsQuery(newsId);
   const {
     data: comments,
     isFetching: isFetchingComments,
     refetch,
-  } = useGetCommentsQuery(Number(id));
+  } = useGetCommentsQuery(newsId);
 
   const handleRefresh = () => {
     refetch();
   };
+  let errorMsg: null | string = null;
+  if (isNaN(newsId)) errorMsg = 'Error. Invalid news id.';
+  if (news === null) errorMsg = 'Error. News not found.';
 
-  return (
-    <PageWrapper title={PageTitle.News} onRefetch={handleRefresh}>
+  const contenOrSpinner = (
+    <>
       {isFetchingNews ? (
         <Spinner />
       ) : (
@@ -38,6 +43,18 @@ export const NewsPage: React.FC = () => {
             <CommentsList comments={comments!} />
           )}
         </>
+      )}
+    </>
+  );
+
+  return (
+    <PageWrapper title={PageTitle.News} onRefetch={handleRefresh}>
+      {!errorMsg ? (
+        contenOrSpinner
+      ) : (
+        <Typography variant="h5" component={'h5'}>
+          {errorMsg}
+        </Typography>
       )}
     </PageWrapper>
   );

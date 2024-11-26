@@ -12,6 +12,7 @@ export const Header: React.FC = () => {
           to={NewsUrl}
           target="_blank"
           size="large"
+          sx={{ fontSize: 20 }}
         >
           Hacker-News-Api
         </Button>
