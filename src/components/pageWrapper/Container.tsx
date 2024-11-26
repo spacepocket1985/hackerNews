@@ -5,6 +5,7 @@ import { RoutePaths } from '../../routes/routePaths';
 export enum PageTitle {
   Main = 'News list | 100 last news',
   News = 'News page',
+  Page404 = 'NotFound',
 }
 
 export const PageWrapper: React.FC<{
