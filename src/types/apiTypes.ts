@@ -24,4 +24,5 @@ export type CommentItemType = {
   time: number;
   type: ItemType.Comment;
   childComment?: CommentItemType[];
+  deleted: boolean;
 };

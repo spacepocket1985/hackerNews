@@ -8,16 +8,26 @@ export const Main: React.FC = () => {
     data: newsIds,
     isFetching: isFetchingIds,
     refetch,
+    isError: isErrorIds,
   } = useGetNewsIdsQuery();
-  const { data: news, isFetching } = useGetNewsQuery(newsIds ?? []);
+  const {
+    data: news,
+    isFetching,
+    isError: isErrorNews,
+  } = useGetNewsQuery(newsIds ?? []);
 
   const handleRefresh = () => {
     refetch();
   };
 
+  const contenOrSpinner =
+    isFetchingIds || isFetching ? <Spinner /> : <NewsList news={news!} />;
+
+  const errorMsg = 'Error fetching list news. Please try refreshing';
+
   return (
     <PageWrapper title={PageTitle.Main} onRefetch={handleRefresh}>
-      {isFetchingIds || isFetching ? <Spinner /> : <NewsList news={news!} />}
+      {isErrorIds || isErrorNews ? errorMsg : contenOrSpinner}
     </PageWrapper>
   );
 };

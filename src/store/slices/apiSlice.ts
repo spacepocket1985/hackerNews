@@ -8,6 +8,7 @@ export type NewsWithComments = {
 
 export type ItemTypeUnion = NewsItemType | CommentItemType;
 
+export const NewsUrl = 'https://github.com/HackerNews/API';
 const BaseUrl = 'https://hacker-news.firebaseio.com/v0/';
 const ItemsEndpoint = 'newstories.json?print=pretty';
 
@@ -94,7 +95,7 @@ export const newsApi = createApi({
           const fetchedComments: CommentItemType[] = [];
           for (const result of commentResults) {
             const comment = result.data as CommentItemType;
-            if (comment) {
+            if (comment && !comment.deleted) {
               if (comment.kids && comment.kids.length) {
                 comment.childComment = await fetchComments(comment.kids);
               }
