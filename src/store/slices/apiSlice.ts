@@ -8,7 +8,7 @@ export type NewsWithComments = {
 
 export type ItemTypeUnion = NewsItemType | CommentItemType;
 
-export const NewsUrl = 'https://news.ycombinator.com/news';
+export const NewsUrl = 'https://github.com/HackerNews/API';
 const BaseUrl = 'https://hacker-news.firebaseio.com/v0/';
 const ItemsEndpoint = 'newstories.json?print=pretty';
 

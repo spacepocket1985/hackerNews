@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { RoutePaths } from '../../routes/routePaths';
 
 export enum PageTitle {
-  Main = 'News list | 100 last news',
+  Main = 'NewsList | 100 last news',
   News = 'News page',
   Page404 = 'NotFound',
 }

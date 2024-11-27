@@ -11,7 +11,7 @@ export const CommentsList: React.FC<{ comments: CommentItemType[] }> = ({
   const renderComments = (comments: CommentItemType[]): React.ReactNode => {
     return comments.map((item) => (
       <React.Fragment key={item.id}>
-        <ItemData keyData={'written by'} valueData={item.by} />
+        <ItemData keyData={'💬written by'} valueData={item.by} />
         <Comment commentText={item.text} />
         {item.childComment ? (
           <Spoiler>{renderComments(item.childComment)}</Spoiler>

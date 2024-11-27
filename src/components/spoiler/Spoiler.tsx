@@ -15,7 +15,7 @@ export const Spoiler: React.FC<{ children: React.ReactNode }> = ({
       id="panel1-header"
     >
       <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
-        View attached comments
+      📌View attached comments
       </Typography>
     </AccordionSummary>
     <AccordionDetails>{children}</AccordionDetails>
