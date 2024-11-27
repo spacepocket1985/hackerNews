@@ -12,7 +12,6 @@ import { NewsItemType } from '../../types/apiTypes';
 import { TimeConverter } from '../../utils/timeConverter';
 import React from 'react';
 
-
 export enum NewsType {
   List = 'list',
   SingleNews = 'news',
@@ -29,7 +28,8 @@ export const News: React.FC<{
         border: '1.5px solid #1976d2',
         borderRadius: 5,
         mb: 1,
-        background: 'linear-gradient(90deg, rgba(255,255,255,1) 75%, rgba(25,118,210,0.42620798319327735) 95%)',
+        background:
+          'linear-gradient(90deg, rgba(255,255,255,1) 75%, rgba(25,118,210,0.42620798319327735) 95%)',
         backgroundPosition: 'right',
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
