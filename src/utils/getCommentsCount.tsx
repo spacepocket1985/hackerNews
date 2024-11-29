@@ -7,6 +7,6 @@ export const getCommentsCount = (comments: CommentItemType[]): number => {
     if (comment.childComment)
       currentCount += getCommentsCount(comment.childComment);
 
-    return (count = count + currentCount);
+    return count + currentCount;
   }, 0);
 };
